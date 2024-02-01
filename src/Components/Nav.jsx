@@ -26,6 +26,7 @@ const Nav = (props) => {
           <option value="none"> --Select hosting service-- </option>
           <option value="catbox.moe">CatBox.moe</option>
           <option value="sdrive.app">Sdrive.app</option>
+          <option value="fileditch.com">Fileditch.com</option>
         </select>
       </div>
     </div>

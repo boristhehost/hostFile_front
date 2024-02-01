@@ -102,9 +102,34 @@ const checkLengthofFiles = (files, length) => {
   return true;
 };
 
+const getReadableSize = (sizeinBytes) => {
+  const formats = ["B", "KB", "MB", "GB"];
+  let size = Number(sizeinBytes);
+  let format = "";
+
+  for (let i = 0; i < formats.length; i++) {
+    // console.log((size < ((2 ** 10)) ** (i + 1)))
+    if (size < (2 ** 10) ** (i + 1)) {
+      format = formats[i];
+
+      size /= (2 ** 10) ** i;
+
+      break;
+    }
+  }
+  if (size >= (2 ** 10) ** (3 + 1)) {
+    format = formats[3];
+
+    size /= (2 ** 10) ** 3;
+  }
+
+  return `${size.toFixed(2)} ${format}`;
+};
+
 export {
   changeURLParams,
   transferTextToClipboard,
   submitIndividual,
   checkLengthofFiles,
+  getReadableSize,
 };

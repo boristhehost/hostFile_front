@@ -10,4 +10,9 @@ export const cloudHosts = [
     description: "**Make sure that files don't exceed 50mb**",
     limitInMB: 50,
   },
+  {
+    name: "fileditch.com",
+    description: "**Make sure that files don't exceed 15gb**",
+    limitInMB: 15000,
+  },
 ];

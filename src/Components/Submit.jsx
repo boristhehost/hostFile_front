@@ -9,6 +9,8 @@ import {
   submitIndividual,
   checkLengthofFiles,
 } from "../helper";
+import { uploadFileDitch } from "../services/fileditch";
+
 import Spinner from "./Spinner";
 
 const Submit = (props) => {
@@ -34,15 +36,22 @@ const Submit = (props) => {
         return;
       }
 
+      if (props.selectedHost.length === 0) {
+        console.log("No host selected");
+        props.setErrorVisibility(true);
+        props.setErrorMessage("Select Hosting platform");
+        return;
+      }
+
       const maxLengthInMb = cloudHosts.find(
-        (ele) => ele.name === props.selectedHost
+        (ele) => ele.name === props.selectedHost,
       ).limitInMB;
       const maxLength = maxLengthInMb * 1024 * 1024;
       if (checkLengthofFiles(files, maxLength) === false) {
         console.log("Max length reached");
         props.setErrorVisibility(true);
         props.setErrorMessage(
-          `Make sure that any of the file is not longer than ${maxLengthInMb} MB`
+          `Make sure that any of the file is not longer than ${maxLengthInMb} MB`,
         );
         return;
       }
@@ -52,11 +61,20 @@ const Submit = (props) => {
       let i = 0;
       let fileLinks = [];
       props.setIsResult(false);
+      // res {status,url,filename}
       for (let file of files) {
-        const res = await submitIndividual(file, i, files.length, hostname);
-        if (res.status === "ok") {
-          fileLinks = res.fileLinks;
+        let res;
+        if (hostname === "fileditch") {
+          const fileLinkObj = await uploadFileDitch(file);
+          // debugger;
+          fileLinks.push(fileLinkObj);
+        } else {
+          res = await submitIndividual(file, i, files.length, hostname);
+          if (res.status === "ok") {
+            fileLinks = res.fileLinks;
+          }
         }
+
         i++;
       }
 
