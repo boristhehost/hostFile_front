@@ -10,6 +10,7 @@ import {
   checkLengthofFiles,
 } from "../helper";
 import { uploadFileDitch } from "../services/fileditch";
+import { uploadUploadCare } from "../services/uploadcare";
 
 import Spinner from "./Spinner";
 
@@ -66,6 +67,10 @@ const Submit = (props) => {
         let res;
         if (hostname === "fileditch") {
           const fileLinkObj = await uploadFileDitch(file);
+          // debugger;
+          fileLinks.push(fileLinkObj);
+        } else if (hostname === "uploadcare") {
+          const fileLinkObj = await uploadUploadCare(file);
           // debugger;
           fileLinks.push(fileLinkObj);
         } else {

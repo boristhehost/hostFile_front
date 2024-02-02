@@ -17,7 +17,7 @@ import Description from "./Components/Description";
 import ToastEle from "./Components/Toast";
 
 function App() {
-  // catbox,sdrive
+  // catbox,sdrive,fileditch,uploadcare(for images only)
   const [selectedHost, setSelectedHost] = useState("");
 
   // All,Images,Videos

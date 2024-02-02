@@ -15,4 +15,9 @@ export const cloudHosts = [
     description: "**Make sure that files don't exceed 15gb**",
     limitInMB: 15000,
   },
+  {
+    name: "uploadcare.com",
+    description: "**Make sure that files don't exceed 10mb**",
+    limitInMB: 10,
+  },
 ];
